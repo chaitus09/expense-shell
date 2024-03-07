@@ -24,7 +24,7 @@
 
     - name: download and extract app content
       ansible.builtin.unarchive:
-        path: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+        src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote-src: yes
 
