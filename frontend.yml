@@ -18,9 +18,9 @@
         state: absent
 
     - name: create the app directory
-      ansible:builtin:file:
-        path: /usr/share/nginx/html
-        state: directory
+      ansible.builtin.file:
+              path: /usr/share/nginx/html
+              state: directory
 
     - name: start Nginx 
       ansible.builtin.systemd_service:
