@@ -17,11 +17,6 @@
         path: /usr/share/nginx/html
         state: absent
 
-    - name: create the app directory
-      ansible.builtin.file:
-        path: /usr/share/nginx/html
-        state: directory
-
     - name: Download and extract the content
       ansible:builtin:unarchive:
         src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
