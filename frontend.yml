@@ -18,10 +18,11 @@
         state: absent
 
     - name: Download and extract the content
-      ansible:builtin:unarchive:
-        src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
-        dest: /usr/share/nginx/html
-        remote_src: yes
+      ansible.builtin.unarchive:
+        src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip   # Path to the source archive file on the target machine
+        dest: /usr/share/nginx/html         # Destination directory where the archive will be extracted
+        remote_src: yes                    # (Optional) Set to yes if src refers to a remote file
+
 
     - name: start Nginx
       ansible.builtin.systemd_service:
