@@ -22,15 +22,9 @@
         path: /usr/share/nginx/html
         state: directory
 
-    - name: Download frontend ZIP file
-      ansible.builtin.get_url:
-        url: https://expense-artifacts.s3.amazonaws.com/frontend.zip
-        dest: /tmp/frontend.zip
-        remote_src: yes
-
-    - name: Extract frontend ZIP file
-      ansible.builtin.unarchive:
-        src: /tmp/frontend.zip
+    - name: download and extract app content
+      ansible:builtin:unarchive:
+        src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
 
