@@ -19,14 +19,14 @@
 
     - name: create the app directory
       ansible.builtin.file:
-              path: /usr/share/nginx/html
-              state: directory
+        path: /usr/share/nginx/html
+        state: directory
 
     - name: download and extract app content
-      ansible:builtin:unarchive:
+      ansible.builtin.unarchive:
         path: https://expense-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
-        remote_src: yes
+        remote-src: yes
 
     - name: start Nginx 
       ansible.builtin.systemd_service:
