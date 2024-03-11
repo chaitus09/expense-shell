@@ -1,0 +1,65 @@
+- name: backend setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable DNF module
+      ansible.builtin.shell: dnf module disable nodejs
+
+    - name: Enable DNF module
+      ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+    - name: DNF nodejs installation
+      ansible.builtin.dnf:
+        name: nodejs
+        state: latest
+
+    - name: Add the user expense
+      ansible.builtin.user:
+        name: expense
+
+    - name: clean up the old content
+      ansible.builtin.file:
+        path: /app
+        state: absent
+
+    - name: Create directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
+
+    - name: Download and extract the content
+      ansible.builtin.unarchive:
+        src: https://expense-artifacts.s3.amazonaws.com/expense-backend-v2.zip   # Path to the source archive file on the target machine
+        dest: /app        # Destination directory where the archive will be extracted
+        remote_src: yes
+
+    - name: download the Nodejs dependencies
+      community.general.npm:
+        path: /app
+        state: latest
+
+    - name: copy backend service file
+      ansible.builtin.copy:
+        src: backend.service
+        dest: /etc/systemd/system/backend.service
+
+    - name: install mysql client
+      ansible.builtin.dnf:
+        name: mysql
+        state: latest
+
+    - name: load the schema
+      community.mysql.mysql_db:
+        state: import
+        name: all
+        target: /app/schema/backend.sql
+        login_user: root
+        login_password: ExpenseApp@1
+        login_host: mysql-dev.rdevops6a.online
+
+    - name: start the backend service
+      ansible.builtin.systemd_service:
+          state: restarted
+          name: backend
+          enabled: yes
+          daemon_reload: yes
