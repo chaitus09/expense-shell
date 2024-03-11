@@ -1,4 +1,4 @@
 - name: say hello
-  hosts: all
+
   ansible.builtin.debug:
     msg: hello
