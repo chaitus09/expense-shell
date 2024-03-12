@@ -1,0 +1,4 @@
+# roles/my_role/vars/main.yml
+-name : variable role level
+my_role_variable: "This is a role-level variable"
+another_role_variable: 42

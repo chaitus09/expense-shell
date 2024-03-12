@@ -1,4 +1,4 @@
 - name: say hello
 
   ansible.builtin.debug:
-    msg: hello
+    msg: hello  {{ my_role_variable}}
