@@ -1,5 +1,5 @@
 - name: demo on vault
-  hosts: localhost
+  hosts: all
 
   vars:
     password: !vault |
