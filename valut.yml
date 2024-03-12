@@ -10,6 +10,6 @@
       3330393032386438620a646536626563303635376435663539306433393638646333336163303162
       3038
   tasks:
-        - name: PRINT
-          ansible.builtin.debug:
-          msg: password -{{password}}
+    - name: PRINT
+      ansible.builtin.debug:
+      msg: password -{{password}}
