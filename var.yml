@@ -6,3 +6,8 @@
       - name: print variable
         ansible.builtin.debug:
           msg: URL_PLAY ="{{URL_PLAY}}"
+
+      - name: print task variable
+        url_task_variable : www.tasl.com
+        ansible.builtin.debug:
+          msg: url_task_variable ="{{url_task_variable}}"
